@@ -51,3 +51,36 @@ else is availabe in a `while` loops!
 If it ran to the end without hitting a break statement, else will execute something. Neat!
 
 ### Break, Continue, and the Try Statement
+Nothing new, but good reminder of `finally`!
+
+### The For Loop
+Best to think of them not as iterating over a list or something like that, but it's iterating over _an iterable_.
+Not new, but helps align how I think about what's happening under the hood differently.
+It's also a neat idea to have an else in a for loop. Typically I would write an if statement after, but often the else would be simpler.
+
+I've never used `enumerate`, but it's significantly easier! Much like looping through key/value pairs in a dict.
+
+### Classes
+"magic methods"
+You can override internal functionality like `str()` to return something
+`__repr__` will change how the object is represented, so when you run `print(class_obj_name)` it will return that method's representation and not something like `<__main__.Rectangle object at 0x10158cee0>`
+using `__eq__` will override how python measures equality of two objects, so two classes with the same instantiation can be more easily equated.
+`isinstance`!
+implementing `__lt__` or `__gt__` will technically both be implemented. If < is not found, it just flips it and it results in >.
+getter and setter
+These are conventions to get an attribute and set an attribute. This is to make attributes implicitly private, and add rules around how they can be defined. For example, in a rectangle the width can't be <= 0, so you can raise an error when this happens.
+Many folks who come from something like java will implement them right out of the gate in order to prevent future cases where you want to restrict it to not break other people's code that have relied on that functionality.
+In Python unless you have an explicit reason to do so, don't bother. You can use a property decorator
+```
+    def __init__(self):
+     self._width = width
+    
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, width)
+
+stopped at 34:15
+https://www.udemy.com/course/python-3-deep-dive-part-1/learn/lecture/9146636#overview
