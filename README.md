@@ -1,8 +1,10 @@
 My fork of the Udemy python deepdive course for notes and trying out things I learn. I don't know why you'd want to be here, but hello I guess?
 
-# installing from Pipfile
+### installing from Pipfile
 active virtual env
+
 `pip install pipenv`
+
 `pipenv install`
 
 Python Deep Dive
