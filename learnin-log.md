@@ -8,7 +8,7 @@ Watched the intro video and made this dang repo. This first section might not in
 
 Remember, you don't know what you don't know!
 
-## Section 2
+## Section 2 - A Quick Refresher
 2024-01-12
 ### The Python Type Hyerarchy
 Overview of types, no new info that won't be covered later. Though I didn't know fractions were a thing, I thought it was all floats/decimals!
@@ -81,6 +81,12 @@ In Python unless you have an explicit reason to do so, don't bother. You can use
 
     @width.setter
     def width(self, width)
+        self._width = width
+```
+These are cool!
 
-stopped at 34:15
-https://www.udemy.com/course/python-3-deep-dive-part-1/learn/lecture/9146636#overview
+## Section 3 - Variables and Memory
+### Variables are Memory References
+Already something I was aware of, but a nice reminder.
+### Reference Counting
+Cool to see this. More things I knew, but I never have to think about it and it's neat to be reminded of.
