@@ -90,3 +90,13 @@ These are cool!
 Already something I was aware of, but a nice reminder.
 ### Reference Counting
 Cool to see this. More things I knew, but I never have to think about it and it's neat to be reminded of.
+### Garbage Collection
+Circular references (two slots in memory point to one another). That's a memory leak! How can that even happen?
+You can interact with the garbage collector using the `gc` module. 
+You're allowed to turn it off, but the only reason you would is for performance, and you have to be absolutely sure you don't have memory leaks.
+### Dynamic vs Static Typing
+Nothing new - just declaring variable types vs not having to do that.
+### Variable Reassignment
+When you change the value of a variable, it creates a new value at a different memory address and references that instead.
+### Object Mutability
+https://www.udemy.com/course/python-3-deep-dive-part-1/learn/lecture/7065350#questions
