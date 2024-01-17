@@ -88,15 +88,103 @@ These are cool!
 ## Section 3 - Variables and Memory
 ### Variables are Memory References
 Already something I was aware of, but a nice reminder.
+
 ### Reference Counting
 Cool to see this. More things I knew, but I never have to think about it and it's neat to be reminded of.
+
 ### Garbage Collection
 Circular references (two slots in memory point to one another). That's a memory leak! How can that even happen?
 You can interact with the garbage collector using the `gc` module. 
 You're allowed to turn it off, but the only reason you would is for performance, and you have to be absolutely sure you don't have memory leaks.
+
 ### Dynamic vs Static Typing
 Nothing new - just declaring variable types vs not having to do that.
+
 ### Variable Reassignment
 When you change the value of a variable, it creates a new value at a different memory address and references that instead.
+
 ### Object Mutability
-https://www.udemy.com/course/python-3-deep-dive-part-1/learn/lecture/7065350#questions
+An object whose internal state _can_ be changed is mutable. If it cannot, it's immutable.
+
+immutable examples:
+- Numbers
+- strings
+- tuples
+- frozen sets
+- user defined classes can be defined as immutable
+Mutable
+- lists
+- sets
+- dictionaries
+- user-defined classes can be defined as mutable
+
+A tuple is mutable, but the elements it contains may _not_ be immutable.
+For example:
+```
+a = [1,2]
+b = [1,2]
+t = (a,b)
+"""t is ([1,2], [1,2])""
+a.append(3)
+"""t is now ([1,2,3], [1,2])"""
+```
+Something to consider is that the method you use to change something will either update it's internal state or create a new reference.
+a.append(3) is not the same as a = a + [3]
+
+### Function Arguments and Mutability
+Pretty much all stuff I know - a function is able to modify a mutable variable that's passed to it.
+
+### Shared References and Mutability
+Again all things I was aware of.
+
+### Variable Equality
+`is` is assessing if two vars have the same _memory address_.
+
+### Everything is an Object 
+I think at some point I knew this, but thinking of operators and built in types as objects is interesting.
+In general I don't think of things like functions as objects even though they are. I haven't encountered a stuation where I need to think of a func as an object to pass to something else, but thinking of some simple lamba functions being passed into iterators it makes sense.
+
+### Python Optimizations: Interning
+Interning is reusing objects on demand
+
+Emmet’s continuing to be a bit of a nut, but he’s doing better every day. He’s still very immature and incredibly prone to distraction. Been playing really increasingly intense games of tug which help fulfill him more and he’s improving at fetch but tends to prefer posession games.
+
+### Python Optimization: String Interning
+if something _looks_ like an identifier (short, all underscore or alphabetical) then it will be interned automatically because python by default will intern things that appear to be namespaces.
+You can force things to intern with sys.intern(). You don't often need to do this, but for things like natural language processors you want words to be interned for quicker comparisons!
+
+### Python Optimizations: Peephole
+Constant expressions are stored expression results. If you have something like 24*60 all over your code, it will remember it for you.
+Membership tests
+
+## Section 4 - Numeric Types
+### Integers
+Integers in most languages are 32 bit, but python is variable bit. If it needs more space, python will give it to it. 
+If you go beyond your architecture bit (64-bit) it will take more than one operation to do basic arithmetic with these numbers because they go beyond what can be stored.
+
+### Integers: Operations
++,-,*,** will all return an integer, but division _always_ returns a float, even if the number is an integer. 
+`//` is floor division, which is the **largest decimel <= the number you are looking at**. This is important to know for negative numbers. floor(-3.2) is -4, _not_ -3. 
+floats have a limited precision, so `math.floor(-3.0000000000000001)` is actually -3, not -4. The 1 ends up getting dropped.
+
+### Integers: Constructors and Bases
+Creating an int from a float _truncates_ the number. 10.9 becomes 10, 122.999 becomes 122, etc.
+The second (optional) argument is the base, so you can indicate 2, 16, whatever base you want, and python will interpret it accordingly. Note: t he int will always be displayed in base 10.
+The required base is between 2 and 36. Obviously the default base is 10.
+1-10 and A-Z are the allowed characters, which is why the base limit is 36 (26 letters + 10 numbers)
+There are internal functions to convert reverse (base 10 to a different base).
+`bin()` is used to represet numbers in base 2.
+`oct()` is base 8.
+`hex()` is base 16.
+You can use the base prefix (`0b`, `0o`, `0x`) to have a number in a specific type. 
+```
+a = 0b1010 # notice this is _not_ a string!
+print(int(a))
+```
+This results in 10.
+
+`n = (n // b) * b + (n % b)
+
+n is the number in base 10 and b is the base
+
+`divmod(n, b)` will return a tuple containing the `//` and `%` operations (in that order) (if you forget, think DIV and then MOD)
