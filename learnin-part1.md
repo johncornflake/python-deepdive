@@ -188,3 +188,11 @@ This results in 10.
 n is the number in base 10 and b is the base
 
 `divmod(n, b)` will return a tuple containing the `//` and `%` operations (in that order) (if you forget, think DIV and then MOD)
+
+### Rational Numbers
+Any number with a finite number of digits before and after the decimal point is rational.
+pi is not a rational number
+`from fraction` is the library to use to work with fractions. Fractions will automatically be reduced (6/4 becomes 3/2). negative numbers are always done on the numerator.
+You can give Fraction an irrational number and it will give an approximate fraction because all numbers, irrational or not, are still represented as floats with limited precision.
+Some floats are not perfectly represented and may have odd conversions into fractions. For example, float 0.3 will not give 3/10 as expected, but a very large num/denom.
+Fraction's max_denominator will approximate the denominator to the max.
