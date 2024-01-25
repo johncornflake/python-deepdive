@@ -196,3 +196,11 @@ pi is not a rational number
 You can give Fraction an irrational number and it will give an approximate fraction because all numbers, irrational or not, are still represented as floats with limited precision.
 Some floats are not perfectly represented and may have odd conversions into fractions. For example, float 0.3 will not give 3/10 as expected, but a very large num/denom.
 Fraction's max_denominator will approximate the denominator to the max.
+
+### Floats: Equality Testing
+One way to compare is to use an epsilon. For example, with an epsilon of .0001: `abs(a-b) > eps`. This is fine for many numbers, but as numbers scale up it gets less reliable.
+Another way is relative tolerance, which fails as numbers get closer to 0. With a tolerance of .1% (or .0001), This formula is `tolerance = rel_tol * max(a,b)`
+
+https://peps.python.org/pep-0485/
+
+Math has it built in! `math.isclose
