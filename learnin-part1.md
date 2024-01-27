@@ -197,6 +197,11 @@ You can give Fraction an irrational number and it will give an approximate fract
 Some floats are not perfectly represented and may have odd conversions into fractions. For example, float 0.3 will not give 3/10 as expected, but a very large num/denom.
 Fraction's max_denominator will approximate the denominator to the max.
 
+### Floats - Internal Representation
+In CPython (most python) floats are in IEEE double-precision binary float, or binary64.
+Numbers like .1 are approximations, because in binary .1 cannot be represented (similar to .3 which is actualy .3333... to infinity) and the numbers are _approximates_.
+To prove this, (0.1+0.1+0.1 == 0.3) returns False! Check with format(n, '25f') to display more
+
 ### Floats: Equality Testing
 One way to compare is to use an epsilon. For example, with an epsilon of .0001: `abs(a-b) > eps`. This is fine for many numbers, but as numbers scale up it gets less reliable.
 Another way is relative tolerance, which fails as numbers get closer to 0. With a tolerance of .1% (or .0001), This formula is `tolerance = rel_tol * max(a,b)`
@@ -204,3 +209,23 @@ Another way is relative tolerance, which fails as numbers get closer to 0. With 
 https://peps.python.org/pep-0485/
 
 Math has it built in! `math.isclose
+
+### Floats: Coercing to Integers
+Obviously, converting a float will result in data loss because any decimal point is not an integer. 
+Pick your poison:
+* Truncate: return the interger portion of the number. In other words, drop everything after the decimal point. 10.9999 -> 10, 99.00001 -> 99. `math.trunc()`
+  * when giving int() a float, it does truncation. So, int(float_var) will truncate it.
+* Floor: the largest integer less than or equal to the number. `math.floor()`
+  * With positive numbers, this is the same as trunc, but negative goes the opposite direction. floor of 10.4 is 10, floor of -10.4 is -11.
+  * Floor division is floor(a / b), which is obviously why they call it floor division.
+* Ceiling is the opposite of floor. The smallest integer greater than or equal to the number. `math.ceil()` ceil(10.4) is 11, -10.4 is -10.
+* Rounding, but that's a whole other topic...
+
+### Floats: Rounding
+Rounds to multiples of power of 10, so the arg can be positive _or_ negative!
+Ties will cause issues. When this happens, it does a "round up," but the better way to say it is it rounds _away from zero._
+But, 1.25 rounds to 1.2, and -1.25 rounds to -1.2, which is the opposite. 
+This is IEEE 254 standard, "Banker's Rounding." rounds to the nearest value with ties rounded to the nearest value with an even significant digit.
+They do this to get rid of bias, so with billions of transactions doing rounding, it tends to balance out because it's not always away from zero.
+You can always round away from zero by adding .5 to positive integers and -.5 to negative integers.
+`sign(x) * int(abs(x)+0.5)` or `int(x + 0.5 * sign(x))`
