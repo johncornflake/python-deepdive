@@ -229,3 +229,10 @@ This is IEEE 254 standard, "Banker's Rounding." rounds to the nearest value with
 They do this to get rid of bias, so with billions of transactions doing rounding, it tends to balance out because it's not always away from zero.
 You can always round away from zero by adding .5 to positive integers and -.5 to negative integers.
 `sign(x) * int(abs(x)+0.5)` or `int(x + 0.5 * sign(x))`
+
+### Decimals
+PEP 327 for implementation details
+`import decimal`
+Decimals have a context that controls certain aspects, like precision and rounding.
+Precision is the number of decimal places, and rounding is the rounding algorithm it will use (remember that from floats?)
+You can set a global context or a local (temporary) context.
