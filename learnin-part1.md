@@ -236,3 +236,13 @@ PEP 327 for implementation details
 Decimals have a context that controls certain aspects, like precision and rounding.
 Precision is the number of decimal places, and rounding is the rounding algorithm it will use (remember that from floats?)
 You can set a global context or a local (temporary) context.
+
+### Decimals: Constructors and Contexts
+You can use a variety of types (including tuples!) to construct a Decimal object.
+Technically you can use a float, but you shouldn't (remember, 0.1 isn't precisely 0.1!)
+
+Working with tuples. 1.23 
+This is 123 * 10^-2. You need the sign, digits, and exponent. To make a decimal with a tuple, you pass (sign(0 for +, 1 for -), (digits), exponent).
+You'dd make this with Decimal(0, (1,2,3), -2)
+
+Context precision does not affect the _constructor_, only when you're actually doing math. For example, adding two decimals will result in the context's precision.
