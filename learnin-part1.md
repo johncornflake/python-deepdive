@@ -246,3 +246,13 @@ This is 123 * 10^-2. You need the sign, digits, and exponent. To make a decimal 
 You'dd make this with Decimal(0, (1,2,3), -2)
 
 Context precision does not affect the _constructor_, only when you're actually doing math. For example, adding two decimals will result in the context's precision.
+
+### Decimals: Math Operations
+div and mod (and divmod) still satisfy **the equation** n = d * (n // d) + (n % d)
+for integers, // performs _truncated_ floor division. this is fine for positive, but not for negative.
+Decimal(10) // Decimal(3) = 3
+Decimal(-10) // Decimal(3) = -3 instead of -4
+
+Some `math` operations are not implemented in the Decimal class (like trig functions)
+`math` functions will cast the Decimal to a float, do the calculation, then return it, so you lose the whole precision mechanism. No benefit to using the math module to do operations on Decimals, really.
+But, Decimal has things like sqrt() built in to get the precise square roots.
