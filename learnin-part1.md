@@ -256,3 +256,13 @@ Decimal(-10) // Decimal(3) = -3 instead of -4
 Some `math` operations are not implemented in the Decimal class (like trig functions)
 `math` functions will cast the Decimal to a float, do the calculation, then return it, so you lose the whole precision mechanism. No benefit to using the math module to do operations on Decimals, really.
 But, Decimal has things like sqrt() built in to get the precise square roots.
+
+### Complex Numbers
+skipped - probably never going to use these
+
+### Booleans
+PEP 285 defines the bool class
+booleans are a _subclass_ of integers, so they inherit all of the integer properties. 
+bools are singleton objects, so 
+
+objects all have their own "truthyness" value which tells you whether or not something is true! This is why doing something like `if x: do a thing`, where x is an integer. If x is any number other than 0, this is true!
