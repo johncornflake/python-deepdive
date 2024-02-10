@@ -4,7 +4,7 @@ Notes, comments, and log for working. Hold yourself accountable and take notes o
 # Part 1 - Functional
 ## Section 1
 2024-01-12
-Watched the intro video and made this dang repo. This first section might not include a lot of new information but it'll be important to watch it and work through things anyway to be sure you fill any knowledge gaps. 
+Watched the intro video and made this dang repo. This first section might not include a lot of new information but it'll be important to watch it and work through things anyway to be sure you fill any knowledge gaps.
 
 Remember, you don't know what you don't know!
 
@@ -14,7 +14,7 @@ Remember, you don't know what you don't know!
 Overview of types, no new info that won't be covered later. Though I didn't know fractions were a thing, I thought it was all floats/decimals!
 
 ### Multi-line statements and strings
-Pretty boring chapter, but it's interesting he's using leading commas. 
+Pretty boring chapter, but it's interesting he's using leading commas.
 Are there any common conventions to have leading commas?
 
 ### Variable Names
@@ -33,7 +33,7 @@ For example, when you run `x < y`, python is _actually_ running `x.__lt__(y)`. N
 - Functions should be snake_case
 - Variables should be snake_case
 - Constands should be uppercase snake_case.
-- 
+-
 **TODO: Read PEP8 style guide!** https://www.python.org/dev/peps/pep-0008
 
 ### Conditionals
@@ -74,7 +74,7 @@ In Python unless you have an explicit reason to do so, don't bother. You can use
 ```
     def __init__(self):
      self._width = width
-    
+
     @property
     def width(self):
         return self._width
@@ -94,7 +94,7 @@ Cool to see this. More things I knew, but I never have to think about it and it'
 
 ### Garbage Collection
 Circular references (two slots in memory point to one another). That's a memory leak! How can that even happen?
-You can interact with the garbage collector using the `gc` module. 
+You can interact with the garbage collector using the `gc` module.
 You're allowed to turn it off, but the only reason you would is for performance, and you have to be absolutely sure you don't have memory leaks.
 
 ### Dynamic vs Static Typing
@@ -140,7 +140,7 @@ Again all things I was aware of.
 ### Variable Equality
 `is` is assessing if two vars have the same _memory address_.
 
-### Everything is an Object 
+### Everything is an Object
 I think at some point I knew this, but thinking of operators and built in types as objects is interesting.
 In general I don't think of things like functions as objects even though they are. I haven't encountered a stuation where I need to think of a func as an object to pass to something else, but thinking of some simple lamba functions being passed into iterators it makes sense.
 
@@ -159,12 +159,12 @@ Membership tests
 
 ## Section 4 - Numeric Types
 ### Integers
-Integers in most languages are 32 bit, but python is variable bit. If it needs more space, python will give it to it. 
+Integers in most languages are 32 bit, but python is variable bit. If it needs more space, python will give it to it.
 If you go beyond your architecture bit (64-bit) it will take more than one operation to do basic arithmetic with these numbers because they go beyond what can be stored.
 
 ### Integers: Operations
-+,-,*,** will all return an integer, but division _always_ returns a float, even if the number is an integer. 
-`//` is floor division, which is the **largest decimel <= the number you are looking at**. This is important to know for negative numbers. floor(-3.2) is -4, _not_ -3. 
++,-,*,** will all return an integer, but division _always_ returns a float, even if the number is an integer.
+`//` is floor division, which is the **largest decimel <= the number you are looking at**. This is important to know for negative numbers. floor(-3.2) is -4, _not_ -3.
 floats have a limited precision, so `math.floor(-3.0000000000000001)` is actually -3, not -4. The 1 ends up getting dropped.
 
 ### Integers: Constructors and Bases
@@ -176,7 +176,7 @@ There are internal functions to convert reverse (base 10 to a different base).
 `bin()` is used to represet numbers in base 2.
 `oct()` is base 8.
 `hex()` is base 16.
-You can use the base prefix (`0b`, `0o`, `0x`) to have a number in a specific type. 
+You can use the base prefix (`0b`, `0o`, `0x`) to have a number in a specific type.
 ```
 a = 0b1010 # notice this is _not_ a string!
 print(int(a))
@@ -211,7 +211,7 @@ https://peps.python.org/pep-0485/
 Math has it built in! `math.isclose
 
 ### Floats: Coercing to Integers
-Obviously, converting a float will result in data loss because any decimal point is not an integer. 
+Obviously, converting a float will result in data loss because any decimal point is not an integer.
 Pick your poison:
 * Truncate: return the interger portion of the number. In other words, drop everything after the decimal point. 10.9999 -> 10, 99.00001 -> 99. `math.trunc()`
   * when giving int() a float, it does truncation. So, int(float_var) will truncate it.
@@ -224,7 +224,7 @@ Pick your poison:
 ### Floats: Rounding
 Rounds to multiples of power of 10, so the arg can be positive _or_ negative!
 Ties will cause issues. When this happens, it does a "round up," but the better way to say it is it rounds _away from zero._
-But, 1.25 rounds to 1.2, and -1.25 rounds to -1.2, which is the opposite. 
+But, 1.25 rounds to 1.2, and -1.25 rounds to -1.2, which is the opposite.
 This is IEEE 254 standard, "Banker's Rounding." rounds to the nearest value with ties rounded to the nearest value with an even significant digit.
 They do this to get rid of bias, so with billions of transactions doing rounding, it tends to balance out because it's not always away from zero.
 You can always round away from zero by adding .5 to positive integers and -.5 to negative integers.
@@ -241,7 +241,7 @@ You can set a global context or a local (temporary) context.
 You can use a variety of types (including tuples!) to construct a Decimal object.
 Technically you can use a float, but you shouldn't (remember, 0.1 isn't precisely 0.1!)
 
-Working with tuples. 1.23 
+Working with tuples. 1.23
 This is 123 * 10^-2. You need the sign, digits, and exponent. To make a decimal with a tuple, you pass (sign(0 for +, 1 for -), (digits), exponent).
 You'dd make this with Decimal(0, (1,2,3), -2)
 
@@ -262,7 +262,52 @@ skipped - probably never going to use these
 
 ### Booleans
 PEP 285 defines the bool class
-booleans are a _subclass_ of integers, so they inherit all of the integer properties. 
-bools are singleton objects, so 
+booleans are a _subclass_ of integers, so they inherit all of the integer properties.
+bools are singleton objects, so
 
 objects all have their own "truthyness" value which tells you whether or not something is true! This is why doing something like `if x: do a thing`, where x is an integer. If x is any number other than 0, this is true!
+
+### Booleans: Truth Values
+The default truthiness of every python object (with exceptions like None, False, 0) is True.
+bool(obj) will first look for __bool__(), and if that's not found it will search for __len__(), if that's not found it returns True.
+
+### Booleans: Precedence and Short Circuiting
+bool operators are not, and, or.
+truth table!
+X Y   not X   X and Y   X or Y
+0 0   1       0         0
+0 1   1       0         1
+1 0   0       0         1
+1 1   0       1         1
+
+Commutativity
+A or B == B or A
+A and B == B and A
+Distributivity
+A and (B or C) == (A and B) or (A and C)
+A or (B and C) == (A or B) and (A or C)
+Associativity
+A or (B or C) == (A or B) or C == A or B or C
+A and (B and C) == (A and B) and C == A and B and C
+De Morgan's Theorom
+not(A or B) == (not A) and (not B)
+not(A and B) == (not A) or (not B)
+Misc
+not(x < y) == x >= y
+not(x <= y) == x > y
+no(not A) == A
+
+Operator Precedence highest to lowest precedence
+()
+< > <= >= == != in is
+not
+and
+or
+
+True or True and False <-- True and False will evaluate first
+
+SHort Circuit Evaluation
+if X is True, (X or Y) can evaluate X without looking at Y, because no matter what Y is it will evaluate to true.
+Opposite with X and Y. If X is False, it doesn't have to evaluate Y because it's False no matter what.
+
+### Boolean: Operators
