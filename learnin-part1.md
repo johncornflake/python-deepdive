@@ -299,7 +299,7 @@ no(not A) == A
 
 Operator Precedence highest to lowest precedence
 ()
-< > <= >= == != in is
+< > <= >= == != in is 
 not
 and
 or
@@ -311,3 +311,31 @@ if X is True, (X or Y) can evaluate X without looking at Y, because no matter wh
 Opposite with X and Y. If X is False, it doesn't have to evaluate Y because it's False no matter what.
 
 ### Boolean: Operators
+x or y returns x if x is truthy, otherwise it returns y without evaluating it.
+x and y returns x if x is falsy, otherwise it returns y without evaluating it.
+
+### Comparison Operators
+all binary operators (take two operants) and evaluate to a bool
+identity:   is / is not compares memory address of any type
+value:      == / != compares values (they have to be compatible to one another)
+ordering:   < <= > >= - doesn't work for all types
+membership: in / not in, used with iterable types
+
+
+## Section 5 - Function Parameters
+### Argument vs Parameter
+It's really just semantics.
+`def my_fun(x, y) # x and y are parameters.`
+`my_func(a, b) # x and y are _arguments_ here.`
+basically, parameters are what they're called in the function itself, and when calling i them they're arguments. it really doesn't matter what you call.
+
+Module scope is important.
+my_func(a, b) received the _memory addresses_ of the arguments passed.
+
+### Positional and Keyword Arguments
+default value stuff, like my_func(a, b=100).
+default args have to go at the end.
+using keywords instead of purely positional args.
+once you use a named argument, all arguments after must be named too.
+
+### Unpacking Iterables
