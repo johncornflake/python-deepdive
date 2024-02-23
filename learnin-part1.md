@@ -339,3 +339,43 @@ using keywords instead of purely positional args.
 once you use a named argument, all arguments after must be named too.
 
 ### Unpacking Iterables
+What defines tuples are not parenthesis, it's the comma! 1,2,3 == (1,2,3,)
+a,b,c = [1,2,3]
+a,b = b,a is a good way to swap variable assignments. this works because python evaluates the right hand side first and completely, _then_ assigns the values.
+
+if d = {1,2,3} and you do a,b,c = d, d is a set which is unordered so you won't get reliable results with the assignments.
+
+### Extended Unpacking
+Using * and ** to unpack
+x
+l = [1,2,3,4,5]
+a, b = l[0], l[1:]
+a, *b, c = l will yield a = 1, b = [2,3,4], c = 5
+or you can use
+a, *b = l
+this applies to every iterable, not just sequence types!
+`*` will always unpack into a _list_, even if the source type is a tuple or something else
+
+** will unpack key/value pairs, so something like
+d = {'a': 1, b: 2}
+c = {'c': 3, 'd': 4}
+x = {d**, c**}
+
+### *args
+In functions, it's customary to use *args in an arg with variable number of arguments.
+
+### Keyword Arguments
+If you use *args combined with keyword arguments, you can _force_ the user to use keyword args instead of all positional.
+def my_func(*args, a, b, c):
+
+What happen is every positional argument sent gets exhausted in *args, and all that's left is what is defined explicitly.
+my_func(1,2,3) will fail. my_func(a=1, b=2, c=3) will work.
+
+or you can have some positional, like def my_func(a, b, *args, c)
+
+Alternatively, you can use * by itself, which you can think of as the end of positional arguments.
+def my_func(*, a, b, c) # a, b and c are all keyword args, any positional will result in an error
+def my_func(a, b, *, c) # a/b positional arguments, c must be keyword arg
+
+If you have a default value for one of the positional args _before_ *args, the keyword args after do not need to have defaults. Even the keyword arguments after do _not_ have to have defaults.
+def my_func(a, b=2, *args, d=1, e) # perfectly valid
