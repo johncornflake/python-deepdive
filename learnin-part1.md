@@ -379,3 +379,35 @@ def my_func(a, b, *, c) # a/b positional arguments, c must be keyword arg
 
 If you have a default value for one of the positional args _before_ *args, the keyword args after do not need to have defaults. Even the keyword arguments after do _not_ have to have defaults.
 def my_func(a, b=2, *args, d=1, e) # perfectly valid
+
+### **kwargs
+No parameters can come after **kwargs
+
+### Application: A Simple Function Timer
+Used the function and it's args/kwargs to time a general function of any type.
+impor time
+def time_it(fn, *args, rep=5, **kwargs):
+  start = time.perf_counter()
+  for i in rang(rep):
+    fn(*args, **kwargs)
+  end = time.perf_counter()
+
+  return (end - start)
+
+### Parameter Defaults: Beware!! 
+When python starts and modules are loaded, all code is executed immediately.
+For example, a=10 is put in memory, functions are put in memory.
+Default values of functions are also being created.
+In general, beware of using a mutable objects (or a callable) as a default arg.
+  it will get run once and never again.
+
+Example, this may look right, but the default dt gets set *once* when it is executed and never again. So, if you don't pass a dt to this, it will print what it was set at on execution.
+def(msg, dt=datetime.now()):
+  print(f"{dt}:  {msg}")
+
+Instead, use dt=None, then something like dt = dt or datetime.now() within the function instead.
+
+### Parameter Defaults: Beware Again!!
+Similar thing, but looking at mutables list lists or dicts and the problems that can arise with them as defaults.
+
+Also shows an example of where we *want* this to happen, like using a cache. If you defnine the default as an empty object and add to it, the cache gets saved for every future run.
