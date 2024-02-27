@@ -379,3 +379,23 @@ def my_func(a, b, *, c) # a/b positional arguments, c must be keyword arg
 
 If you have a default value for one of the positional args _before_ *args, the keyword args after do not need to have defaults. Even the keyword arguments after do _not_ have to have defaults.
 def my_func(a, b=2, *args, d=1, e) # perfectly valid
+
+# Section 6: First Class Functions
+First class objects are any objects that can:
+* be passed to a function as an argument
+* be returned from a function
+* be assigned to a variable
+* be stored in a data structure (list, tuple, etc)
+
+All functions are first class objects.
+
+Higher-order functions take a function as an argument and/or return a function (plenty of that when we cover decorators)
+
+### Docstrings and Annotations
+Yep, docstrings. 
+Annotations are useful and I should use them more.
+def my_func(a: <expression>, b: <expression>) -> <expression>:
+    pass
+
+The <expression> can be _any_ expression!
+Annotations are _not_ stored in `__docs__`, they're in `__annotations__`.
