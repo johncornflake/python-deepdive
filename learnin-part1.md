@@ -416,7 +416,7 @@ Also shows an example of where we *want* this to happen, like using a cache. If 
 First class objects are any objects that can:
 * be passed to a function as an argument
 * be returned from a function
-* be assigned to a variable
+* be assigned to a variable 
 * be stored in a data structure (list, tuple, etc)
 
 All functions are first class objects.
@@ -431,3 +431,15 @@ def my_func(a: <expression>, b: <expression>) -> <expression>:
 
 The <expression> can be _any_ expression!
 Annotations are _not_ stored in `__docs__`, they're in `__annotations__`.
+
+### lamda  expressions
+Also called anonymous functions because they don't have a name.
+lambda: [parameter list]: expression
+lambda functions are *not* equivalent to closures (whatever they are).
+a lambda can only have a single expression (no assignments and whatnot)
+No annotations.
+they can have default values.
+
+### lambdas and sorting
+sorted() takes in a function as an argument.
+ 
