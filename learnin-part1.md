@@ -442,4 +442,12 @@ they can have default values.
 
 ### lambdas and sorting
 sorted() takes in a function as an argument.
- 
+this is where lambas particularly come in handy
+sorted(<iterable>, key=lambda <args>: <expression>)
+
+### Function Introspection
+Functions are objects, so you can do something like my_func.category = 'math' and give it an attribute like any other object.
+__code__ returns the a bunch of things about the code itself, like variable names.
+It's rather convoluted to piece everything together yourself, but you can use the inspect module to do it more easily.
+
+difference between a function and a method is a method is a class attribute that is callable and a function is its own thing.
